@@ -8,11 +8,11 @@ import torch
 import pandas as pd
 
 
-disease_info = pd.read_csv('D:/Jaswanth/Project_XO/Plant-Disease-Detection-main/Flask Deployed App/disease_info.csv' , encoding='cp1252')
-supplement_info = pd.read_csv('D:/Jaswanth/Project_XO/Plant-Disease-Detection-main/Flask Deployed App/supplement_info.csv',encoding='cp1252')
+disease_info = pd.read_csv('disease_info.csv' , encoding='cp1252')
+supplement_info = pd.read_csv('supplement_info.csv',encoding='cp1252')
 
 model = CNN.CNN(39)    
-model.load_state_dict(torch.load("D:/Jaswanth/Project_XO/Plant-Disease-Detection-main/Flask Deployed App/plant_disease_model_1_latest.pt"))
+model.load_state_dict(torch.load("https://drive.google.com/file/d/1Y9rm38weJbAJy1IwFTj9XAtWn3IJC_7R/view?usp=drive_link"))
 model.eval()
 
 def prediction(image_path):
@@ -49,7 +49,7 @@ def submit():
     if request.method == 'POST':
         image = request.files['image']
         filename = image.filename
-        file_path = os.path.join('D:/Jaswanth/Project_XO/Plant-Disease-Detection-main/Flask Deployed App/static/uploads', filename)
+        file_path = os.path.join('static/uploads', filename)
         image.save(file_path)
         print(file_path)
         pred = prediction(file_path)
